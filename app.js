@@ -16,8 +16,8 @@ function updateProduct(quantity, id) {
       ],
       function(err, res) {
         if (err) throw err;
-        console.log(res.affectedRows + " products updated!\n");
-        console.log(res)
+        // console.log(res.affectedRows + " products updated!\n");
+        // console.log(res)
         
         // Call deleteProduct AFTER the UPDATE completes
         // deleteProduct();
@@ -65,13 +65,17 @@ inquirer
       connection.query(sql, function (error, results, fields) {
     if (error) throw error;
     if(amountOrder <= results[0].stock_quantity){
+        const total = results[0].price * amountOrder;
         const quantity = results[0].stock_quantity - amountOrder;
         const id = results[0].ID;
         console.log(results[0].ID)
         updateProduct(quantity, id)
+        console.log(`at ${results[0].price} per unit, your total is : $${total}`)
 
+    } else {
+        console.log('INSUFFICIENT QUANTITY!')
     }
-    console.log(results[0].stock_quantity);
+    
     });
 
    
