@@ -18,7 +18,7 @@ $ node bamazon.js
 
 
 
-![alt text](https://github.com/boyangm/bamazon/blob/master/Screen%20Shot%202019-09-07%20at%207.24.20%20PM.png?raw=true)
+![alt text](https://github.com/boyangm/bamazon/blob/master/fulfilling%20order.png?raw=true)
 ### Tech
 
 bamazon uses a number of open source projects to work properly:
