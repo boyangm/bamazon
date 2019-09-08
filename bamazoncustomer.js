@@ -1,7 +1,12 @@
+
+// declare depencencies
 const inquirer = require('inquirer');
 const mysql = require('mysql');
 require("dotenv").config();
 
+
+// updates the quatity of the prodcut based on id
+// quantity === string  id === integer
 function updateProduct(quantity, id) {
     console.log("Updating quantities...\n");
     var query = connection.query(
@@ -16,18 +21,10 @@ function updateProduct(quantity, id) {
       ],
       function(err, res) {
         if (err) throw err;
-        // console.log(res.affectedRows + " products updated!\n");
-        // console.log(res)
-        
-        // Call deleteProduct AFTER the UPDATE completes
-        // deleteProduct();
       }
     );
-  
-    // logs the actual query being run
-    // console.log(query.sql);
   }
-
+// configure mySQL for configuration and connection
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
@@ -40,9 +37,11 @@ connection.connect(function(err) {
         console.error('error connecting: ' + err.stack);
         return;
     }
-    
-    console.log('connected as id ' + connection.threadId);
+  
 });
+
+//prompts the user for questions then calls the update function based on ID
+
 inquirer
   .prompt([
     {
@@ -53,7 +52,7 @@ inquirer
     {
     name: "amount",
     type: "input",
-    message: "Houw many units would you like to buy?",
+    message: "How many units would you like to buy?",
     },
 
 ])
@@ -68,7 +67,6 @@ inquirer
         const total = results[0].price * amountOrder;
         const quantity = results[0].stock_quantity - amountOrder;
         const id = results[0].ID;
-        console.log(results[0].ID)
         updateProduct(quantity, id)
         console.log(`at ${results[0].price} per unit, your total is : $${total}`)
 
@@ -80,4 +78,3 @@ inquirer
 
    
   });
-// connection.connect();
